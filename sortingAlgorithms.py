@@ -1,3 +1,4 @@
+#/usr/bin/python3
 import random
 
 def random_sort():
@@ -72,4 +73,3 @@ def shell_sort(collection):
                 yield
             collection[j] = temp
             i += 1
-
