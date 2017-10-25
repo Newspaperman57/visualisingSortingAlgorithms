@@ -25,7 +25,6 @@ def bubble_sort(items):
 def get_partial_list(origin_list, left_index, right_index): # Added
     return origin_list[left_index:right_index+1]
 
-
 def MERGE(A,start,mid,end):
     L = get_partial_list(A,start,mid)
     R = get_partial_list(A,mid+1,end)
@@ -59,8 +58,6 @@ def selection_sort(collection):
                 least = k
                 yield
         collection[least], collection[i] = (collection[i], collection[least])
-
-        
 
 def shell_sort(collection):
     # Marcin Ciura's gap sequence
@@ -141,7 +138,6 @@ def heapify(collection, index, heap_size):
     if largest != index:
         collection[largest], collection[index] = collection[index], collection[largest]
         heapify(collection, largest, heap_size)
-
 
 def heap_sort(collection):
     n = len(collection)
