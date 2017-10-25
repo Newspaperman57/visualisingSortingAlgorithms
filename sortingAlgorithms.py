@@ -9,6 +9,7 @@ def random_sort():
     sorts.append(shell_sort)
     sorts.append(bogo_sort)
     sorts.append(gnome_sort)
+    sorts.append(insertion_sort)
     sorts.append(heap_sort)
     return random.choice(sorts)
 
@@ -109,7 +110,26 @@ def gnome_sort(collection):
             i -= 1
             if (i == 0):
                 i = 1
-
+                
+def insertion_sort(collection):
+    """Pure implementation of the insertion sort algorithm in Python
+    :param collection: some mutable ordered collection with heterogeneous
+    comparable items inside
+    :return: the same collection ordered by ascending
+    Examples:
+    >>> insertion_sort([0, 5, 3, 2, 2])
+    [0, 2, 2, 3, 5]
+    >>> insertion_sort([])
+    []
+    >>> insertion_sort([-2, -5, -45])
+    [-45, -5, -2]
+    """
+    for index in range(1, len(collection)):
+        while 0 < index and collection[index] < collection[index - 1]:
+            collection[index], collection[index - 1] = collection[index - 1], collection[index]
+            yield
+            index -= 1
+            
 def heapify(collection, index, heap_size):
     largest = index
     left_index = 2 * index + 1
