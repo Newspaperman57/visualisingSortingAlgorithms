@@ -7,6 +7,8 @@ def random_sort():
     sorts.append(merge_sort)
     sorts.append(selection_sort)
     sorts.append(shell_sort)
+    sorts.append(bogo_sort)
+    sorts.append(gnome_sort)
     return random.choice(sorts)
 
 def bubble_sort(items):
@@ -73,3 +75,36 @@ def shell_sort(collection):
                 yield
             collection[j] = temp
             i += 1
+
+def is_sorted(collection):
+    if len(collection) < 2:
+        return True
+    for i in range(len(collection) - 1):
+        if collection[i] > collection[i + 1]:
+            return False
+    return True
+
+def bogo_sort(collection):
+    while not is_sorted(collection):
+        random.shuffle(collection)
+        yield
+    return collection
+
+def gnome_sort(collection):
+    """
+    Pure implementation of the gnome sort algorithm in Python.
+    """
+    if len(collection) <= 1:
+        return collection
+        
+    i = 1
+    
+    while i < len(collection):
+        if collection[i-1] <= collection[i]:
+            i += 1
+        else:
+            collection[i-1], collection[i] = collection[i], collection[i-1]
+            yield
+            i -= 1
+            if (i == 0):
+                i = 1
