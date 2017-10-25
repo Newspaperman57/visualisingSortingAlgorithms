@@ -1,6 +1,10 @@
 ## Sorting Visualiser
 Currently implemented sorting algorithms:
-- Selection sort
-- Shell sort
 - Bubble sort
 - Merge sort
+- Selection sort
+- Shell sort
+- Bogo sort
+- Gnome sort
+- Insertion sort
+- Heap sort
