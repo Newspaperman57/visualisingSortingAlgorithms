@@ -7,6 +7,7 @@ def random_sort():
     sorts.append(merge_sort)
     sorts.append(selection_sort)
     sorts.append(shell_sort)
+    sorts.append(bogo_sort)
     return random.choice(sorts)
 
 def bubble_sort(items):
@@ -73,3 +74,17 @@ def shell_sort(collection):
                 yield
             collection[j] = temp
             i += 1
+
+def is_sorted(collection):
+    if len(collection) < 2:
+        return True
+    for i in range(len(collection) - 1):
+        if collection[i] > collection[i + 1]:
+            return False
+    return True
+
+def bogo_sort(collection):
+    while not is_sorted(collection):
+        random.shuffle(collection)
+        yield
+    return collection
