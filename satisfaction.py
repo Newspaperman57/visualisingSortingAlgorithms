@@ -10,7 +10,7 @@ background = pygame.Surface(screen.get_size())
 background = background.convert()
 background.fill((0,0,0))
 
-pixelSize = 10
+pixelSize = 5
 gridHeight = int((900-20)/pixelSize)
 gridWidth = int((1600-20)/pixelSize)
 grid = [[0 for x in range(gridHeight)] for y in range(gridWidth)] 
@@ -35,6 +35,7 @@ while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT: 
             sys.exit()
+    updates = []
     for x in range(gridWidth):
         try:
             next(sorter[x])
@@ -43,11 +44,10 @@ while True:
         for y in range(gridHeight):
             if grid[x][y] != lastGrid[x][y] or first:
                 col = pygame.Color(0)
-                col.hsva = (grid[x][y]*360, 100, 100, 100)
-                pygame.display.update(
-                    pygame.draw.rect(screen, col, (x*pixelSize+offsetX, y*pixelSize+offsetY, pixelSize, pixelSize)))
+                col.hsva = (grid[x][y]*360, 100, 90, 100)
+                updates.append(pygame.draw.rect(screen, col, (x*pixelSize+offsetX, y*pixelSize+offsetY, pixelSize, pixelSize)))
                 lastGrid[x][y] = grid[x][y]
-    
+    pygame.display.update(updates)
     first = False
     #pygame.display.flip()
 
