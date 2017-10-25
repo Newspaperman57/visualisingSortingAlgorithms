@@ -9,6 +9,7 @@ def random_sort():
     sorts.append(shell_sort)
     sorts.append(bogo_sort)
     sorts.append(gnome_sort)
+    sorts.append(heap_sort)
     return random.choice(sorts)
 
 def bubble_sort(items):
@@ -108,3 +109,27 @@ def gnome_sort(collection):
             i -= 1
             if (i == 0):
                 i = 1
+
+def heapify(collection, index, heap_size):
+    largest = index
+    left_index = 2 * index + 1
+    right_index = 2 * index + 2
+    if left_index < heap_size and collection[left_index] > collection[largest]:
+        largest = left_index
+    if right_index < heap_size and collection[right_index] > collection[largest]:
+        largest = right_index
+    if largest != index:
+        collection[largest], collection[index] = collection[index], collection[largest]
+        heapify(collection, largest, heap_size)
+
+
+def heap_sort(collection):
+    n = len(collection)
+    for i in range(n // 2 - 1, -1, -1):
+        yield
+        heapify(collection, i, n)
+    for i in range(n - 1, 0, -1):
+        collection[0], collection[i] = collection[i], collection[0]
+        yield
+        heapify(collection, 0, i)
+        yield
