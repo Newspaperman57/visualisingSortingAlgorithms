@@ -30,7 +30,7 @@ background.fill(0x000000)
 first = True
 
 clock = pygame.time.Clock()
-
+simulateColorBlindness = False if len(sys.argv) == 2 and sys.argv[1] == "--no-color" else True
 while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT: 
@@ -44,7 +44,10 @@ while True:
         for y in range(gridHeight):
             if grid[x][y] != lastGrid[x][y] or first:
                 col = pygame.Color(0)
-                col.hsva = (grid[x][y]*360, 100, 90, 100)
+                if simulateColorBlindness:
+                    col.hsva = (grid[x][y]*360, 100, 90, 100)
+                else:
+                    col.hsva = (0, 0, grid[x][y]*100, 100)
                 updates.append(pygame.draw.rect(screen, col, (x*pixelSize+offsetX, y*pixelSize+offsetY, pixelSize, pixelSize)))
                 lastGrid[x][y] = grid[x][y]
     pygame.display.update(updates)
