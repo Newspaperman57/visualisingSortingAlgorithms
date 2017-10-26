@@ -11,6 +11,7 @@ def random_sort():
     sorts.append(gnome_sort)
     sorts.append(insertion_sort)
     sorts.append(heap_sort)
+    sorts.append(quick_sort)
     return random.choice(sorts)
 
 def bubble_sort(items):
@@ -149,3 +150,39 @@ def heap_sort(collection):
         yield
         heapify(collection, 0, i)
         yield
+
+def sub_partition(array, start, end, idx_pivot):
+    if not (start <= idx_pivot <= end):
+        raise ValueError('idx pivot must be between start and end')
+
+    array[start], array[idx_pivot] = array[idx_pivot], array[start]
+    yield
+    pivot = array[start]
+    i = start + 1
+    j = start + 1
+
+    while j <= end:
+        if array[j] <= pivot:
+            array[j], array[i] = array[i], array[j]
+            yield
+            i += 1
+        j += 1
+
+    array[start], array[i - 1] = array[i - 1], array[start]
+    yield
+    return i - 1
+
+def quick_sort(array, start=0, end=None, depth = 0):
+    if end is None:
+        end = len(array) - 1
+
+    if end - start < 1:
+        return
+
+    idx_pivot = random.randint(start, end)
+    i = yield from sub_partition(array, start, end, idx_pivot)
+    
+    yield from quick_sort(array, start, i - 1, depth+1)
+    yield from quick_sort(array, i + 1, end, depth+1)
+    
+    

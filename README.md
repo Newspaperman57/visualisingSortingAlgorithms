@@ -8,3 +8,4 @@ Currently implemented sorting algorithms:
 - Gnome sort
 - Insertion sort
 - Heap sort
+- Quick sort
